@@ -1,23 +1,21 @@
 import * as actionTypes from '../actions/actionTypes'
 const initialState ={
-    name: "",
-    description: "",
-    repository_id:"",
-    author:"",
-    status:""
- 
+     pageSize:4,
+     total:"",
+     pageNo:1,
 
 }
 
 
 const reducer = (state = initialState,action) => {
-  
+    console.log(state,action)
  switch(action.type){
-     case actionTypes.GET_ISSUE_SUCCESS:
+     case actionTypes.FILTER_ISSUES_SUCCESS:
          return{
              ...state,
-             ...action.issue,
+             paginationData:action.paginationData,
          }
+        
        
      default: return state   
  }

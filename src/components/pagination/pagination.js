@@ -1,23 +1,25 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as paginationActions from "../../store/actions/paginationAction"
 
-export default class Pagination extends Component {
+class Pagination extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-   // this.props.paginationHandler(i);
-   console.log("clicked")
+  handleClick(i) {
+   console.log(i)
+   let page = i
+   let total= this.props.issues.length
+   this.props.onClickingPage(page,total) 
   }
 
   render() {
-  //  const { pageSize, page, total } = this.props.pagination;
-
-
-    let pageSize=10
-    let total= 150
-    let page=1
+    console.log(this.props.issues.length)
+    let pageSize=4
+    let total= this.props.issues.length
+    let page=this.props.paginationData.page
     let pages = Math.ceil(total / pageSize);
 
     const pageNumbers = [];
@@ -34,7 +36,6 @@ export default class Pagination extends Component {
   
       };
       pageNumbers.push(
-       
         <div
           style={style}
           key={i}
@@ -53,10 +54,29 @@ export default class Pagination extends Component {
       alignItems: "center",
       display: "flex",
       flexWrap: "wrap",}} id="page-numbers">
-        {pageNumbers}
+        {pageNumbers}  
       </div>
      
     );
   }
 }
+
+
+const mapStateToProps = state =>{
+  return{
+    issues: state.issueList.filterdIssues,
+    paginationData:state.paginationData
+
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    onClickingPage : (pageNo,total,pageSize) => dispatch(paginationActions.getDataWithPagination(pageNo,total,pageSize))
+      
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Pagination);
+
+
 

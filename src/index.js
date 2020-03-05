@@ -9,12 +9,14 @@ import {createStore,combineReducers, applyMiddleware, compose} from 'redux';
 import issueListReducer from './store/reducers/listReducer'
 import issueReducer from './store/reducers/issueReducer'
 import filterReducer from './store/reducers/filterReducer'
+import paginationReducer from './store/reducers/paginationReducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
           issueList: issueListReducer,
           issue: issueReducer,
-          filter:filterReducer
+          filter:filterReducer,
+          paginationData:paginationReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

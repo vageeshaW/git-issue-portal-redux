@@ -41,7 +41,7 @@ class Issue extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
+   
   return {
     name: state.issue.name,
     description: state.issue.description,
