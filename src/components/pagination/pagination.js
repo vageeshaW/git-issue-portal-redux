@@ -12,11 +12,11 @@ class Pagination extends Component {
    console.log(i)
    let page = i
    let total= this.props.issues.length
-   this.props.onClickingPage(page,total) 
+   let pageSize=4
+   this.props.onClickingPage(page,total,pageSize) 
   }
 
   render() {
-    console.log(this.props.issues.length)
     let pageSize=4
     let total= this.props.issues.length
     let page=this.props.paginationData.page
@@ -25,7 +25,7 @@ class Pagination extends Component {
     const pageNumbers = [];
     for (let i = 1; i <= pages; i++) {
       let style = {
-        backgroundColor: page === i ? "grey" : "white",
+        backgroundColor: "grey",
         width: 15,
         margin: 5,
         float: "left",
@@ -41,6 +41,7 @@ class Pagination extends Component {
           key={i}
           onClick={() => {
             this.handleClick(i);
+           
           }}
         >
           {i}
@@ -71,6 +72,7 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = dispatch =>{
+  console.log(",,")
   return{
     onClickingPage : (pageNo,total,pageSize) => dispatch(paginationActions.getDataWithPagination(pageNo,total,pageSize))
       
