@@ -7,10 +7,10 @@ export const filterIssuesSuccess = ( obj ) => {
     };
 };
 
-export const updateFilterdIssues = ( obj ) => {
+export const updateFilterdIssues = ( issueList ) => {
     return {
         type: actionTypes.FILTER_ISSUES,
-        filterFeilds:obj
+        issueList
     };
 };
 
@@ -20,6 +20,12 @@ export const filterIssueFail = ( error ) => {
         error: error
     };
 };
+export const setTotal = ( total ) => {
+    return {
+        type: actionTypes.SET_TOTAL,
+        total
+    };
+};
 
 
 export const filterIssues = (type,value) => {
@@ -27,10 +33,25 @@ export const filterIssues = (type,value) => {
       type,
       value
     }
+    let newIssues=[];
     
-    return dispatch  => {
-       
+    return (dispatch,getState)  => {
+       const {issueList:{issues}}=getState();
+       if (
+        obj.type &&
+        obj.value &&
+        obj.type != "" &&
+        obj.value != ""
+      ) {
+        let type = obj.type;
+        let value = obj.value;
+         newIssues = issues.filter(x => x[type] === value);
+      } else {
+        newIssues = issues;
+      }
         dispatch(filterIssuesSuccess(obj));
-        dispatch(updateFilterdIssues(obj))
+        dispatch(updateFilterdIssues(newIssues));
+        dispatch(setTotal(newIssues.length));
+       
     };
 };

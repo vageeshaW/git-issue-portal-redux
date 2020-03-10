@@ -9,7 +9,7 @@ class Pagination extends Component {
   }
 
   handleClick(i) {
-   console.log(i)
+
    let page = i
    let total= this.props.issues.length
    let pageSize=4
@@ -72,7 +72,7 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = dispatch =>{
-  console.log(",,")
+
   return{
     onClickingPage : (pageNo,total,pageSize) => dispatch(paginationActions.getDataWithPagination(pageNo,total,pageSize))
       

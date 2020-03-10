@@ -12,9 +12,18 @@ class Filter extends Component {
   searchHandler = (event) => {
      
      let val = event.target.value;
-     this.props.onFilteringIssues('status',val) 
-     console.log(val)    
+     let type = this.props.filter.type
+     this.props.onFilteringIssues(type,val) 
+    
   }
+
+  dropDownHandler = (event) => {
+    let type = event.target.value; 
+    let val = this.props.filter.val
+    this.props.onFilteringIssues(type,val) 
+ }
+
+
 
 
   render() {  
@@ -39,8 +48,8 @@ class Filter extends Component {
     return (
       <div>
           <br></br>
-        <select style={style_dropDown} >
-        <option value="filter">Filter</option>
+        <select style={style_dropDown} onChange={this.dropDownHandler}>
+        <option value="">Filter</option>
         <option value="author"> By Author</option>
         <option value="status">By Status</option>
         </select>
@@ -55,6 +64,7 @@ const mapStateToProps = state =>{
   return{
 
     issues:state.issueList.filterdIssues,
+    filter:state.filter
 
   }
 }

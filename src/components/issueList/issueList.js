@@ -60,7 +60,7 @@ class IssueList extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+
   return {
     issues: state.issueList.filterdIssues,
     filter: state.filter,

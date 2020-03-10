@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 const initialState ={
-    pageNo: 2,
+    pageNo: 1,
     total: '',
     pageSize: 4
 
@@ -8,14 +8,19 @@ const initialState ={
 
 
 const reducer = (state = initialState,action) => {
-    console.log(state,action)
+  
  switch(action.type){
      case actionTypes.GET_PAGINATION_SUCCESS:
          return{
              ...state,
             ...action.paginationData,
          }
-        
+         case actionTypes.SET_TOTAL:
+            return{
+                ...state,
+               total:action.total,
+            }
+           
        
      default: return state   
  }
